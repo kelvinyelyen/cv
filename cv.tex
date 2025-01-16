@@ -1,0 +1,314 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=1.5 cm, % seperation between body and page edge from the left
+    right=1.5 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Kelvin Yelyen's CV},
+    pdfauthor={Kelvin Yelyen},
+    pdfcreator={Kelvin Yelyen},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    % \usepackage[T1]{fontenc} % this breaks sb2nov
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+\makeatother
+\pagestyle{empty}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{}
+
+    \placelastupdatedtext
+    \begin{header}
+        \textbf{\fontsize{24 pt}{24 pt}\selectfont Kelvin Yelyen}
+        
+        \mbox{\color{black}Accra, Ghana}
+        
+        \mbox{\hrefWithoutArrow{https://kelvinyelyen.com/}{\color{primaryColor}\hspace*{0.13cm}kelvinyelyen.com}}%
+        \kern 0.25 cm%
+        \AND% 
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{mailto:kelvinyelyen@gmail.com}{\color{black}\hspace*{0.13cm}kelvinyelyen@gmail.com}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://github.com/kelvinyelyen}{\color{primaryColor}\hspace*{0.13cm}github.com/kelvinyelyen}}%
+    \end{header}
+
+    \vspace{0.3 cm - 0.3 cm}
+
+
+    \section{Education}
+        
+        \begin{twocolentry}{
+        \textbf{Navrongo, UER} 
+        
+        \textit{Sept 2017 – July 2021}}
+            \textbf{University of Development Studies}
+
+            \textit{BS in Computer Science}
+            
+        \end{twocolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{
+        \textbf{Nandom, UWR} 
+        
+        \textit{Oct 2014 – June 2017}}
+            \textbf{Nandom Senior High}
+
+            \textit{General Science}
+            
+        \end{twocolentry}
+
+
+    \section{Interest}
+    
+    \begin{highlights}
+        \item Machine Learning, Neural Networks, Cognitive Computing
+    \end{highlights}
+
+    
+    \section{Industry Experience}
+
+        \begin{twocolentry}{
+        \textit{Remote, Ghana}    
+            
+        \textit{Dec 2022 – Present}}
+            \textbf{Freelance}
+            
+            \textit{Software Engineer}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Developed full-stack web applications ensuring scalable and maintainable solutions in JavaScript and Python
+                \item  Contributed to open-source projects on GitHub, focusing on modular code-bases and CI/CD pipelines, improving
+                project maintainability
+            \end{highlights}
+        \end{onecolentry}
+
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{
+        \textit{Wa, Ghana}    
+            
+        \textit{Nov 2021 – Nov 2022}}
+            \textbf{Social Security and Insurance Trust (SSNIT)}
+            
+            \textit{National Service Personnel}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                 \item Managed data registration processes for over 2,000 employees, ensuring high data accuracy
+                \item Streamlined data workflows through IT solutions, enhancing operational efficiency by 20\%
+                \item Provided technical support for system improvements, enhancing overall service delivery and employee satisfaction
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+        
+        \begin{twocolentry}{
+        \textit{Wa, Ghana}    
+            
+        \textit{May 2020 – July 2020}}
+            \textbf{Vodafone Ghana}
+            
+            \textit{Student Intern}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Conducted research on Vodafone Ghana's operational model, analyzing its technology, business, and retail strategies
+                \item Submitted a comprehensive final report detailing research outcomes
+            \end{highlights}
+        \end{onecolentry}
+
+    
+    \section{Teaching Experience}
+        
+        \begin{twocolentry}{
+        \textit{Accra, Ghana}    
+            
+        \textit{March 2024 – Present}}
+            \textbf{Academic City University}
+            
+            \textit{Faculty Assistant}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Facilitated learning in computational science courses, by mentoring students and simplifying complex concepts
+                \item Supported practical course applications and guided research projects in computational sciences
+                \item Support administrative tasks and facilitate collaborative learning initiatives
+            \end{highlights}
+        \end{onecolentry}
+
+
+    
+    \section{Projects and Research}
+
+        
+        \begin{onecolentry}{
+       
+            \textit{Electronic Health Records (EHR) System} \\ 
+                \textbf{University for Development Studies, Ghana, 2021}
+                \text{\href{https://drive.google.com/file/d/1OfbmOqsmnb479wTh7FYDjtCgKnx1dJPR/view}{[Paper]}}}
+        \end{onecolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Developed a prototype EHR system to streamline patient data management and reduce retrieval times by 40\%
+                \item Authored a research paper analyzing the system's impact on healthcare efficiency and security standards
+            \end{highlights}
+        \end{onecolentry}
+
+
+    
+    \section{Skills}
+
+        
+        \begin{onecolentry}
+            \textbf{Technical:} Python, JavaScript, TypeScript, C, SQL, TensorFlow, Scikit-learn, React.js, Next.js, Git
+
+        \end{onecolentry}
+
+        \vspace{0.1 cm}
+
+        \begin{onecolentry}
+            \textbf{Laboratory:} Data Analysis, Statistical Analysis, Data Preprocessing
+        \end{onecolentry}
+
+
+    
+
+\end{document}
